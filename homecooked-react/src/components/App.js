@@ -4,6 +4,8 @@ import axios from 'axios';
 import Cookies from '../helpers/Cookies';
 import UserAuth from './UserAuth';
 import Content from './Content';
+import NavBar from './NavBar'
+import { BrowserRouter} from "react-router-dom";
 
 class App extends Component {
   constructor(){
@@ -68,7 +70,7 @@ class App extends Component {
     // take away the cookie
     Cookies.set('token', '');
     // remove the user and set the mode to auth
-    this.setState({user: false, mode: 'auth'});
+    this.setState({user: false, mode: 'auth'}, window.location.replace("/"));
   }
 
   // method that renders the view based on the mode in the state
@@ -89,7 +91,12 @@ class App extends Component {
       )
     } else if(this.state.mode === 'content') {
       return (
-        <Content logout={this.logout.bind(this)} user={this.state.user} />
+        <div>
+        <NavBar logout={this.logout.bind(this)} user={this.state.user}/>
+        <BrowserRouter>
+          <Content logout={this.logout.bind(this)} user={this.state.user} />
+        </BrowserRouter>
+      </div>
       )
     }
   }

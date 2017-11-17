@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
+import DinnerList from "./DinnerList"
+import SingleDinner from "./SingleDinner"
+import NavBar from "./NavBar"
 
+
+class Content extends Component {
+  constructor(props) {
+    super(props);
+  }
 // component that renders content
 // this will render when there is a valid user
-const Content = (props) => {
-  return(
-    <div className="content">
-      <h2>Welcome, {props.user.name}</h2>
-      <p>Your email address is: {props.user.email}</p>
-      <p>You have a cookie set to: {props.user.token}</p>
-      <button onClick={props.logout}>Click here to log out!</button>
-    </div>
-  )
+render() {
+  return (
+    <Switch>
+
+      <Route exact="exact" path="/" render={props => <Redirect to="/dinners"/>} />
+      <Route exact="exact" path="/dinners" render={props => <DinnerList {...props} {...this.props}/>}/>
+      <Route  path="/dinners/:id" render={props => <SingleDinner {...props} {...this.props}/>}/>
+    </Switch>)
+}
 }
 
 export default Content;
