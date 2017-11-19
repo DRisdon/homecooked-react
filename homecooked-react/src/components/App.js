@@ -92,9 +92,11 @@ class App extends Component {
     } else if(this.state.mode === 'content') {
       return (
         <div>
-        <NavBar logout={this.logout.bind(this)} user={this.state.user}/>
         <BrowserRouter>
+          <div>
+          <NavBar logout={this.logout.bind(this)} user={this.state.user}/>
           <Content logout={this.logout.bind(this)} user={this.state.user} />
+          </div>
         </BrowserRouter>
       </div>
       )

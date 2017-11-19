@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from "./NavBar"
 import DinnerTile from "./DinnerTile"
+import EmptyDinnerTile from "./EmptyDinnerTile"
 import axios from "axios"
 import moment from "moment"
 import {Link} from "react-router-dom"
@@ -29,13 +30,15 @@ class DinnerList extends Component {
 
   render() {
     return (<div>
-      <div>
-        <h2>Hosting</h2>
+      <h2>Hosting</h2>
+      <div className="dinner-list">
         {this.state.dinners.hosting.map((dinner) => <DinnerTile dinner={dinner} user={this.props.user}/>)}
+        <EmptyDinnerTile user={this.props.user}/>
       </div>
-      <div>
-        <h2>Attending</h2>
+      <h2>Attending</h2>
+      <div className="dinner-list">
         {this.state.dinners.attending.map((dinner) => <DinnerTile dinner={dinner} host={dinner.host.name} user={this.props.user}/>)}
+        {this.state.dinners.attending.length === 0 && <p>Nothing here yet!</p>}
       </div>
     </div>);
   }

@@ -8,11 +8,18 @@ class DinnerTile extends Component {
 
   render() {
     return (
-      <div>
-        <Link to={`/dinners/${this.props.dinner.info.id}`}>{moment(this.props.dinner.info.starts_at).format("ddd MM/DD")}</Link>
+      <span>
+      <Link className="dinner-link-wrapper" to={`/dinners/${this.props.dinner.info.id}`}>
+      <div className="dinner-tile">
+        <div className="dinner-date">
+        <h3 className="dinner-link">{moment(this.props.dinner.info.starts_at).format("ddd, MMMM DD")}</h3>
+        </div>
         {this.props.host && <p>hosted by {this.props.host}</p>}
         {this.props.dinner.recipes.map(recipe => <p>{recipe.name}</p>)}
       </div>
+      </Link>
+      </span>
+
     );
   }
 

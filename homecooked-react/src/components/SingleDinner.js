@@ -37,6 +37,7 @@ class SingleDinner extends Component {
           })}
 
         </div>
+        <Link to={`/dinners/${this.props.match.params.id}/addrecipe`}>Add a recipe</Link><br/><br/>
         <Link to="/dinners">Back</Link>
       </div>
     );
