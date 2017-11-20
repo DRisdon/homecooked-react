@@ -28,7 +28,7 @@ class SearchWrapper extends Component {
       recipeResults: [],
       mode: 'loading'
     })
-    axios.get(`${this.props.url}/recipes/search/${query}?auth_token=${this.props.user.id}`).then(res => {
+    axios.get(`${this.props.url}/recipes/search/${query}?auth_token=${this.props.user.token}`).then(res => {
       console.log(res.data);
       this.setState({
         recipeResults: res.data,
