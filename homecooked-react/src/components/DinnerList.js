@@ -5,6 +5,7 @@ import EmptyDinnerTile from "./EmptyDinnerTile"
 import axios from "axios"
 import moment from "moment"
 import {Link} from "react-router-dom"
+import PastDinnerTile from "./PastDinnerTile"
 
 class DinnerList extends Component {
 
@@ -12,6 +13,10 @@ class DinnerList extends Component {
     super(props);
     this.state = {
       dinners: {
+        hosting: [],
+        attending: []
+      },
+      pastDinners: {
         hosting: [],
         attending: []
       },
@@ -24,6 +29,12 @@ class DinnerList extends Component {
       // console.log(res);
       this.setState({
         dinners: res.data
+      });
+    });
+    axios.get(`${this.props.url}/dinners/past?auth_token=${this.props.user.token}`).then(res => {
+      // console.log(res);
+      this.setState({
+        pastDinners: res.data
       })
     })
   }
@@ -31,15 +42,27 @@ class DinnerList extends Component {
   render() {
     return (<div>
       <NavBar {...this.props}/>
-      <h2>Hosting</h2>
+      <h1>Upcoming Dinners</h1>
+      <h2>Your Dinners</h2>
       <div className="dinner-list">
         {this.state.dinners.hosting.map((dinner) => <DinnerTile dinner={dinner} user={this.props.user} kind=""/>)}
         <EmptyDinnerTile user={this.props.user}/>
       </div>
-      <h2>Attending</h2>
+      <h2>Dinners You're Attending</h2>
       <div className="dinner-list">
         {this.state.dinners.attending.map((dinner) => <DinnerTile dinner={dinner} host={dinner.host.name} user={this.props.user} kind="attending-"/>)}
         {this.state.dinners.attending.length === 0 && <p>Nothing here yet!</p>}
+      </div>
+      <h1>Past Dinners</h1>
+      <h2>Your Dinners</h2>
+      <div className="dinner-list">
+        {this.state.pastDinners.hosting.map((dinner) => <PastDinnerTile dinner={dinner} user={this.props.user} kind=""/>)}
+        {this.state.pastDinners.hosting.length === 0 && <p>Nothing here!</p>}
+      </div>
+      <h2>Dinners You Attended</h2>
+      <div className="dinner-list">
+        {this.state.pastDinners.attending.map((dinner) => <PastDinnerTile dinner={dinner} host={dinner.host.name} user={this.props.user} kind="attending-"/>)}
+        {this.state.pastDinners.attending.length === 0 && <p>Nothing here!</p>}
       </div>
     </div>);
   }

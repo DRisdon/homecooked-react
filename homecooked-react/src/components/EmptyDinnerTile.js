@@ -12,9 +12,9 @@ class EmptyDinnerTile extends Component {
       <Link className="empty-dinner-link-wrapper" to={`/dinners/new`}>
       <div className="empty-dinner-tile">
         <div className="empty-dinner-date">
-        <h3 className="empty-dinner-link">Add another dinner</h3>
+        <h3 className="empty-dinner-link">Add a dinner</h3>
         </div>
-
+        <div className="add-circle">+</div>
       </div>
       </Link>
       </span>

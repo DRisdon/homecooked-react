@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from "axios"
 import moment from "moment"
 import {Link, Redirect} from "react-router-dom"
 import NavBar from "./NavBar"
 import InviteForm from "./InviteForm"
+import DinnerInfo from "./DinnerInfo"
+import DinnerGuests from "./DinnerGuests"
 
 class SingleDinner extends Component {
 
@@ -24,83 +26,118 @@ class SingleDinner extends Component {
     this.delete = this.delete.bind(this);
     this.newInvite = this.newInvite.bind(this);
     this.closeInviteWindow = this.closeInviteWindow.bind(this);
+    this.checkIfInvited = this.checkIfInvited.bind(this);
+    this.uninviteUser = this.uninviteUser.bind(this);
+    this.removeSelf = this.removeSelf.bind(this);
   }
 
   componentDidMount() {
     axios.get(`${this.props.url}/dinners/${this.props.match.params.id}?auth_token=${this.props.user.token}`).then(res => {
       console.log(res.data);
-      this.setState({ dinner: res.data })
-    })
+      this.setState({dinner: res.data})
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ((prevState.mode === 'invite' && this.state.mode === 'view') || (prevState.mode === 'view' && this.state.mode === 'uninvited')) {
+      axios.get(`${this.props.url}/dinners/${this.props.match.params.id}?auth_token=${this.props.user.token}`).then(res => {
+        console.log(res.data);
+        this.setState({dinner: res.data, mode: 'view'})
+      });
+    }
   }
 
   delete(e) {
     e.preventDefault();
     axios.delete(`${this.props.url}/dinners/${this.props.match.params.id}?auth_token=${this.props.user.token}`).then(res => {
       console.log('deleted!');
-      this.setState({ deleted: true })
+      this.setState({deleted: true})
     })
   }
 
   newInvite(e) {
-    this.setState({ mode: 'invite', dimmed: 'dimmed' },
-  );
+    this.setState({
+      mode: 'invite',
+      dimmed: 'dimmed'
+    },);
   }
 
   closeInviteWindow(e) {
     e.preventDefault();
-    this.setState({ mode: 'view', dimmed: '' });
+    this.setState({mode: 'view', dimmed: ''});
+  }
+
+  checkIfInvited(userId) {
+    for (let i = 0; i < this.state.dinner.invited.length; i++) {
+      if (this.state.dinner.invited[i].id === userId) {
+        console.log('true');
+        return 'invited';
+      }
+    }
+    for (let i = 0; i < this.state.dinner.attendees.length; i++) {
+      if (this.state.dinner.attendees[i].id === userId) {
+        console.log('true');
+        return 'attending';
+      }
+    }
+    console.log('false');
+    return false;
+  }
+
+  uninviteUser(e) {
+    e.preventDefault();
+    const userId = Number(e.target.dataset.id);
+    console.log('uninviting user ' + userId);
+    if (this.checkIfInvited(userId) === 'invited') {
+      axios.delete(`${this.props.url}/dinners/${this.state.dinner.info.id}/invites/${userId}?auth_token=${this.props.user.token}`).then(res => {
+        this.setState({ mode: 'uninvited' })
+      })
+    }
+    else if (this.checkIfInvited(userId) === 'attending') {
+      axios.delete(`${this.props.url}/dinners/${this.state.dinner.info.id}/attendees/${userId}?auth_token=${this.props.user.token}`).then(res => {
+        this.setState({ mode: 'uninvited' })
+      })
+    }
+  }
+
+  removeSelf(e) {
+    e.preventDefault();
+    const userId = this.props.user.id;
+    console.log('uninviting user ' + userId);
+    if (this.checkIfInvited(userId) === 'invited') {
+      axios.delete(`${this.props.url}/dinners/${this.state.dinner.info.id}/invites/${userId}?auth_token=${this.props.user.token}`).then(res => {
+        this.setState({ mode: 'removeself' })
+      })
+    }
+    else if (this.checkIfInvited(userId) === 'attending') {
+      axios.delete(`${this.props.url}/dinners/${this.state.dinner.info.id}/attendees/${userId}?auth_token=${this.props.user.token}`).then(res => {
+        this.setState({ mode: 'removeself' })
+      })
+    }
   }
 
   render() {
-    return (
-      <div>
-        <NavBar {...this.props}/>
+    return (<div>
+      <NavBar {...this.props}/>
       <div className="dinner-wrapper">
-      <div className={`single-dinner ${this.state.dimmed}`}>
-        {this.state.deleted && <Redirect to="/dinners"/>}
-        <h1>{moment(this.state.dinner.starts_at).format("ddd MM/DD")}</h1>
-        {(this.state.dinner.host.id !== this.props.user.id) && <h2>Hosted by {this.state.dinner.host.name}</h2>}
-        {<h3>at {this.state.dinner.info.location}</h3>}
-        {
-          (this.state.dinner.attendees.length <= 0) &&
-          (this.state.dinner.invited.length <= 0) &&
-          (this.state.dinner.host.id === this.props.user.id) &&
-          <button className="button" onClick={this.newInvite}>Invite friends</button>
-        }
-        <div>
-          <h3>Recipes:</h3>
-          <div className="recipes-saved">
-          {this.state.dinner.recipes.map(recipe => {
-            return <Link to={`/dinners/${this.props.match.params.id}/recipes/${recipe.id}`} className="recipe-result-saved">
-              <img className="recipe-image-small" src={recipe.image_url}/>
-              <div className='recipe-result-info'>
-              <p>{recipe.name}</p>
-            </div>
-            </Link>;
-          })}
-        </div>
 
-        </div>
-        <br/>
-        {(this.state.dinner.host.id === this.props.user.id) && <Link className="button" to={`/dinners/${this.props.match.params.id}/addrecipe`}>Add a recipe</Link>}
+        <DinnerInfo {...this.props}
+          dinner={this.state.dinner}
+          deleted={this.state.deleted}
+          delete={this.delete}
+          newInvite={this.newInvite}/>
 
-        {(this.state.dinner.host.id === this.props.user.id) && <button className="button" onClick={this.delete}>Delete dinner</button>}
-        <br/><br/>
-        <Link className="button" to="/dinners">Back to your list</Link>
+        <DinnerGuests {...this.props}
+          dinner={this.state.dinner}
+          newInvite={this.newInvite}
+          checkIfInvited={this.checkIfInvited}
+          uninviteUser={this.uninviteUser}
+          removeSelf={this.removeSelf}/>
+
+        {this.state.mode === 'invite' && <InviteForm dinner={this.state.dinner} {...this.props} close={this.closeInviteWindow}/>}
+        {this.state.mode === 'removeself' && <Redirect to="/dinners"/>}
       </div>
-      {((this.state.dinner.attendees.length > 0) || (this.state.dinner.invited.length > 0)) &&
-        <div className="user-list">
-        <h1>Guests:</h1>
-        {(this.state.dinner.host.id === this.props.user.id) &&<button className="button" onClick={this.newInvite}>Invite friends</button>}
-        <h2>Attending:</h2>
-        {this.state.dinner.attendees.map(user => <p>{user.name}</p>)}
-        <h2>Invited:</h2>
-        {this.state.dinner.invited.map(user => <p>{user.name}</p>)}
-      </div>}
-      {this.state.mode === 'invite' && <InviteForm dinner={this.state.dinner} {...this.props} close={this.closeInviteWindow}/>}
-    </div>
-  </div>
-    );
+    </div>);
   }
 
 }

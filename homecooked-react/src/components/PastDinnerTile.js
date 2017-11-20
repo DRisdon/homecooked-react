@@ -4,7 +4,7 @@ import axios from "axios"
 import moment from "moment"
 import {Link} from "react-router-dom"
 
-class DinnerTile extends Component {
+class PastDinnerTile extends Component {
 
   render() {
     const threeRecipes = [];
@@ -23,7 +23,7 @@ class DinnerTile extends Component {
         </div>
         <div className="tile-recipes">
         {threeRecipes.map(recipe => recipe)}
-        {this.props.dinner.recipes.length > 3 && <p> and more... </p>}
+        {this.props.dinner.recipes.length > 3 && <p> and more.. </p>}
       </div>
       </div>
       </Link>
@@ -34,4 +34,4 @@ class DinnerTile extends Component {
 
 }
 
-export default DinnerTile;
+export default PastDinnerTile;

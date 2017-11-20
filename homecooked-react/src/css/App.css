@@ -2,6 +2,7 @@ body {
   background-color: rgb(251, 251, 251);
   margin-top: 100px;
   font-family: 'Lato', sans-serif;
+  margin-bottom: 50px;
 }
 
 a {
@@ -10,6 +11,12 @@ a {
 
 .App {
   text-align: center;
+}
+
+.user-name {
+  color: white;
+  margin: 30px 15px;
+  font-style: bold;
 }
 
 .home-logo {
@@ -44,17 +51,23 @@ a {
   position: absolute;
   left: 10px;
   top: 10px;
+  margin: 0;
   display: inline;
-  font-size: 45px;
+  font-size: 50px;
 }
 
 .logo:hover {
   color: rgb(235, 235, 235);
 }
 
+.nav-links {
+  border-left: 1px solid rgb(185, 84, 81);
+  margin-right: 10px;
+}
+
 .nav-link {
   color: white;
-  margin: 30px 15px;
+  margin: 30px 10px;
   background-color: transparent;
   font-size: 16px;
   border: none;
@@ -112,11 +125,12 @@ a {
 .dinner-link {
   color: white;
   text-decoration: none;
-
+  margin: auto;
 }
 
 .tile-recipes {
   margin-top: 15px;
+  font-size: 14px;
 }
 
 .empty-dinner-tile {
@@ -149,7 +163,21 @@ a {
 .empty-dinner-link {
   color: white;
   text-decoration: none;
+  margin: auto;
+}
 
+.add-circle {
+  margin: auto;
+  margin-top: 20%;
+  background-color: rgb(241, 240, 240);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 25px;
 }
 
 .search-wrapper {
@@ -192,9 +220,10 @@ a {
 
 .recipes-saved {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  margin: 0 12%;
+  justify-content: center;
 }
 
 .recipe-result-saved {
@@ -259,12 +288,17 @@ a {
 
 .single-dinner {
   margin-bottom: 100px;
+  width: 70vw;
 }
 
 .dinner-wrapper {
   display: flex;
   justify-content: space-around;
-  margin: 0 20%;
+  margin: 0 50px;
+}
+
+.user-list {
+  width: 30vw;
 }
 
 input {
@@ -363,7 +397,7 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
 .user-result {
   background-color: white;
   width: 100%;
-  padding: 0;
+  padding: 0 5px;
   margin: 0;
   display: flex;
   align-items: center;

@@ -9,12 +9,23 @@ class InviteForm extends Component {
     super(props);
     this.state = {
       results: [],
-      invited: false
+      invited: false,
+      dinner: {
+        info: {},
+        host: {},
+        attendees: [],
+        invited: [],
+        recipes: []
+      }
     };
 
     this.getResults = this.getResults.bind(this);
     this.checkIfInvited = this.checkIfInvited.bind(this);
     this.invite = this.invite.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({dinner: this.props.dinner})
   }
 
   getResults(query) {
@@ -27,14 +38,14 @@ class InviteForm extends Component {
   }
 
   checkIfInvited(user) {
-    for (let i = 0; i < this.props.dinner.invited.length; i++) {
-      if (this.props.dinner.invited[i].id === user.id) {
+    for (let i = 0; i < this.state.dinner.invited.length; i++) {
+      if (this.state.dinner.invited[i].id === user.id) {
         console.log('true');
         return true;
       }
     }
-    for (let i = 0; i < this.props.dinner.attendees.length; i++) {
-      if (this.props.dinner.attendees[i].id === user.id) {
+    for (let i = 0; i < this.state.dinner.attendees.length; i++) {
+      if (this.state.dinner.attendees[i].id === user.id) {
         console.log('true');
         return true;
 
@@ -46,10 +57,11 @@ class InviteForm extends Component {
 
   invite(e) {
     e.preventDefault();
-    axios.post(`${this.props.url}/dinners/${this.props.dinner.info.id}/invite?auth_token=${this.props.user.token}`,
+    axios.post(`${this.props.url}/dinners/${this.state.dinner.info.id}/invite?auth_token=${this.props.user.token}`,
       {invited_id: e.target.dataset.id}).then(res => {
-      this.setState({invited: true});
+      this.setState({invited: true, results: []});
     });
+    this.state.dinner.invited.push({id: Number(e.target.dataset.id)})
   }
 
   render() {
@@ -60,14 +72,13 @@ class InviteForm extends Component {
         {
           this.state.results.map((user, i) => (<div className="user-result" key={i}>
             <p>{user.name}</p>
-            {this.props.dinner.host.id !== user.id && !this.checkIfInvited(user) &&
+            {this.state.dinner.host.id !== user.id && !this.checkIfInvited(user) &&
               <button data-id={user.id} className="button" onClick={this.invite}>Invite</button>}
-            {this.props.dinner.host.id === user.id && <p className="host-warning">(host)</p>}
+            {this.state.dinner.host.id === user.id && <p className="host-warning">(host)</p>}
             {this.checkIfInvited(user) && <p className="host-warning">(already invited)</p>}
           </div>))
         }
       </div>
-      {this.state.invited && <Redirect to={`/dinners/${this.props.dinner.info.id}`}/>}
     </div>);
   }
 
