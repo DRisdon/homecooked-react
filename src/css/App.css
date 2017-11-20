@@ -413,5 +413,5 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
 .edamam-logo {
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  left: 10px;
 }
