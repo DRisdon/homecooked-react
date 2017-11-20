@@ -5,6 +5,7 @@ import SingleDinner from "./SingleDinner"
 import NavBar from "./NavBar"
 import NewDinner from "./NewDinner"
 import SearchWrapper from "./SearchWrapper"
+import SingleRecipe from "./SingleRecipe"
 
 
 class Content extends Component {
@@ -22,6 +23,7 @@ render() {
       <Route exact="exact" path="/dinners/new" render={props => <NewDinner {...props} {...this.props}/>}/>
       <Route exact="exact" path="/dinners/:id" render={props => <SingleDinner {...props} {...this.props}/>}/>
       <Route exact="exact" path="/dinners/:id/addrecipe" render={props => <SearchWrapper {...props} {...this.props}/>}/>
+      <Route exact="exact" path="/dinners/:id/recipes/:recipeid" render={props => <SingleRecipe {...props} {...this.props}/>}/>
     </Switch>
 
   )

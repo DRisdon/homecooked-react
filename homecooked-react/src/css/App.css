@@ -1,5 +1,6 @@
 body {
   background-color: rgb(251, 251, 251);
+  margin-top: 100px;
 }
 
 .App {
@@ -12,6 +13,10 @@ body {
   height: 80px;
   padding-right: 30px;
   border-bottom: 1px solid rgb(185, 84, 81);
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  box-shadow: 0px 3px 3px rgba(94, 94, 94, 0.2);
 }
 
 .logo {
@@ -70,14 +75,28 @@ body {
 
 .dinner-date {
   background-color: rgb(236, 110, 106);
-  padding: 1px;
+  padding: 10px 0;
+  height: 20%;
   border-bottom: 1px solid rgb(185, 84, 81);
+  text-decoration: none;
+}
+
+.attending-dinner-date {
+  background-color: rgb(106, 177, 236);
+  padding: 10px 0;
+  height: 20%;
+  border-bottom: 1px solid rgb(90, 152, 203);
   text-decoration: none;
 }
 
 .dinner-link {
   color: white;
   text-decoration: none;
+  margin: auto;
+}
+
+.tile-recipes {
+  margin-top: 15px;
 }
 
 .empty-dinner-tile {
@@ -140,6 +159,7 @@ body {
   border-radius: 2px;
   width: 320px;
   color: white;
+  transition: .2s all;
 }
 
 .recipe-result:hover {
@@ -147,13 +167,72 @@ body {
   cursor: pointer;
 }
 
+.recipes-saved {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.recipe-result-saved {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 5px;
+  background-color: rgb(236, 110, 106);
+  padding: 10px 0;
+  border-radius: 2px;
+  width: 320px;
+  color: white;
+  transition: .2s all;
+  text-decoration: none;
+}
+
+.recipe-result-saved:hover {
+  box-shadow: 0px 3px 3px lightgray;
+  cursor: pointer;
+}
+
 .recipe-result-info {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: left;
+  font-size: 14px;
 }
 
 .recipe-image-small {
   height: 100px;
   margin: 0 10px;
   border-radius: 2px;
+}
+
+.selected-recipe {
+  width: 40vw;
+  min-height: 60vh;
+  border-left: 1px solid rgb(198, 198, 198);
+}
+
+.ingredient {
+  text-align: left;
+  margin: 5px 20px;
+}
+
+.single-recipe {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-bottom: 60px;
+}
+
+.sing-recipe-right, .single-recipe-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-on-tile {
+  margin: 5px;
+}
+
+.single-dinner {
+  margin-bottom: 100px;
 }

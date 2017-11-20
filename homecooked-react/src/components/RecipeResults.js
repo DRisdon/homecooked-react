@@ -5,17 +5,24 @@ class RecipeResults extends Component {
   constructor(props) {
     super(props);
 
+    this.selectRecipe = this.selectRecipe.bind(this)
+  }
+
+  selectRecipe(e) {
+    e.preventDefault();
+    console.log('recipe ' + e.target.dataset.index + ' selected!');
+    this.props.selectRecipe(e.target.dataset.index);
   }
 
   render() {
     return (
       <div className='recipe-results'>
         {this.props.results.map((recipe, i) => {
-          return <div className='recipe-result' data-index={i}>
-            <img className='recipe-image-small' src={recipe.image_url}/>
-            <div className='recipe-result-info'>
-            <p>{recipe.name}</p>
-            <p>Source: {recipe.source}</p>
+          return <div className='recipe-result' data-index={i} onClick={this.selectRecipe}>
+            <img className='recipe-image-small' data-index={i} src={recipe.image_url}/>
+            <div className='recipe-result-info' data-index={i}>
+            <p data-index={i}>{recipe.name}</p>
+            <p data-index={i}>Source: {recipe.source}</p>
             </div>
           </div>;
         })}
