@@ -7,6 +7,7 @@ import Content from './Content';
 import NavBar from './NavBar'
 import { BrowserRouter} from "react-router-dom";
 import Loading from '../loading.gif'
+import Transparent from '../transparent.png'
 
 class App extends Component {
   constructor(){
@@ -111,6 +112,7 @@ class App extends Component {
     return (
       <div className="App">
         { this.renderView() }
+        <img className="edamam-logo" src={Transparent}/>
       </div>
     );
   }

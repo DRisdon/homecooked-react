@@ -409,3 +409,9 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
 .host-warning {
   color: rgb(136, 136, 136);
 }
+
+.edamam-logo {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
