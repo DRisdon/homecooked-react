@@ -56,9 +56,12 @@ class SingleDinner extends Component {
         </div>
 
         </div>
-        {(this.state.dinner.host.id === this.props.user.id) && <div><Link to={`/dinners/${this.props.match.params.id}/addrecipe`}>Add a recipe</Link><br/><br/></div>}
-        {(this.state.dinner.host.id === this.props.user.id) && <div><button onClick={this.delete}>Delete this dinner</button><br/><br/></div>}
-        <Link to="/dinners">Back</Link>
+        <br/>
+        {(this.state.dinner.host.id === this.props.user.id) && <Link className="button" to={`/dinners/${this.props.match.params.id}/addrecipe`}>Add a recipe</Link>}
+
+        {(this.state.dinner.host.id === this.props.user.id) && <button className="button" onClick={this.delete}>Delete dinner</button>}
+        <br/><br/>
+        <Link className="button" to="/dinners">Back</Link>
       </div>
     );
   }

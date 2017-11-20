@@ -57,8 +57,8 @@ class SingleRecipe extends Component {
           })}
         </div>
         <br/>
-        {(this.state.dinner.host.id === this.props.user.id) && <div><button onClick={this.delete}>Delete this recipe</button><br/><br/></div>}
-        <Link to={`/dinners/${this.props.match.params.id}`}>Back</Link>
+        {(this.state.dinner.host.id === this.props.user.id) && <div><button className="button" onClick={this.delete}>Delete this recipe</button><br/><br/></div>}
+        <Link className="button" to={`/dinners/${this.props.match.params.id}`}>Back</Link>
         </div>
       </div>
     );

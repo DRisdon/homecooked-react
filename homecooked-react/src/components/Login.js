@@ -36,6 +36,8 @@ class Login extends Component {
 
   render() {
     return (<div className="auth-form">
+      <h1 class="home-logo">Homecooked</h1>
+      <h2 class="home-tagline">Cook something new every night!</h2>
       <h2>Log In</h2>
       <form onSubmit={this.login.bind(this)}>
 
@@ -46,7 +48,7 @@ class Login extends Component {
         <input value={this.state.inputs.password} id='password' name='password' type='password' onChange={e => this.changeInput(e, 'password')}/>
         <br/>
         <div className="form-buttons"><br/>
-          <button type="submit" className="form-button">Login</button>
+          <button type="submit" className="form-button">Login</button><br/>
           <button onClick={this.props.toggleMode} className="form-button">Sign Up</button>
         </div>
 

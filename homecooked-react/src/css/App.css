@@ -1,10 +1,27 @@
 body {
   background-color: rgb(251, 251, 251);
   margin-top: 100px;
+  font-family: 'Lato', sans-serif;
+}
+
+a {
+  text-decoration: none;
 }
 
 .App {
   text-align: center;
+}
+
+.home-logo {
+  font-size: 60px;
+  color: rgb(236, 110, 106);
+  margin-bottom: 0;
+}
+
+.home-tagline {
+  margin-top: 10px;
+  font-size: 20px;
+  color: rgb(236, 110, 106);
 }
 
 .nav-bar {
@@ -14,6 +31,9 @@ body {
   padding-right: 30px;
   border-bottom: 1px solid rgb(185, 84, 81);
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   width: 100vw;
   top: 0;
   box-shadow: 0px 3px 3px rgba(94, 94, 94, 0.2);
@@ -34,7 +54,7 @@ body {
 
 .nav-link {
   color: white;
-  margin: 30px 10px;
+  margin: 30px 15px;
   background-color: transparent;
   font-size: 16px;
   border: none;
@@ -92,7 +112,7 @@ body {
 .dinner-link {
   color: white;
   text-decoration: none;
-  margin: auto;
+
 }
 
 .tile-recipes {
@@ -120,7 +140,8 @@ body {
 
 .empty-dinner-date {
   background-color: rgb(148, 148, 148);
-  padding: 1px;
+  padding: 10px 0;
+  height: 20%;
   border-bottom: 1px solid rgb(96, 96, 96);
   text-decoration: none;
 }
@@ -128,6 +149,7 @@ body {
 .empty-dinner-link {
   color: white;
   text-decoration: none;
+
 }
 
 .search-wrapper {
@@ -155,6 +177,7 @@ body {
   flex-direction: row;
   margin: 5px 5px;
   background-color: rgb(236, 110, 106);
+  border: 1px solid rgb(185, 84, 81);
   padding: 10px 0;
   border-radius: 2px;
   width: 320px;
@@ -179,6 +202,7 @@ body {
   flex-direction: row;
   margin: 5px 5px;
   background-color: rgb(236, 110, 106);
+  border: 1px solid rgb(185, 84, 81);
   padding: 10px 0;
   border-radius: 2px;
   width: 320px;
@@ -235,4 +259,31 @@ body {
 
 .single-dinner {
   margin-bottom: 100px;
+}
+
+input {
+  height: 25px;
+}
+
+input[type="submit"], .button, button[type="submit"], .form-button{
+  border: none;
+  border-radius: 5px;
+  padding: 6px 20px;
+  margin: 5px;
+  height: 27.5px;
+  font-size: 12px;
+  min-width: 100px;
+  background-color: rgb(106, 177, 236);
+  border-top: .5px solid rgb(90, 152, 203);
+  color: white;
+  outline: none;
+}
+
+input[type="submit"]:hover, .button:hover, button[type="submit"]:hover, .form-button:hover {
+  background-color: #58d8f5;
+  cursor: pointer;
+}
+
+input[type="submit"]:active, .button:active, button[type="submit"]:active, .form-button:active {
+  background-color: rgb(106, 177, 236);
 }

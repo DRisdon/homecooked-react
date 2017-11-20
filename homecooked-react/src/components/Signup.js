@@ -41,6 +41,8 @@ class SignUp extends Component {
   render(){
     return(
       <div className="auth-form">
+        <h1 class="home-logo">Homecooked</h1>
+        <h2 class="home-tagline">Cook something new every night!</h2>
         <h2>Sign Up</h2>
         <form onSubmit={this.signUp.bind(this)}>
 
@@ -76,7 +78,7 @@ class SignUp extends Component {
           /><br/>
 
           <div className="form-buttons"><br/>
-            <button type="submit" className="form-button">Sign Up</button>
+            <button type="submit" className="form-button">Sign Up</button><br/>
             <button onClick={this.props.toggleMode} className="form-button">Log In</button>
           </div>
 

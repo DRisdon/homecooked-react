@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import {Redirect} from "react-router-dom"
+import {Redirect, Link} from "react-router-dom"
 
 class NewDinner extends Component {
 
@@ -72,6 +72,8 @@ class NewDinner extends Component {
           <br/>
           <input type='submit' value='Submit'/>
         </form>
+        <br/>
+        <Link className="button" to="/dinners">Back</Link>
       </div>);
   }
 

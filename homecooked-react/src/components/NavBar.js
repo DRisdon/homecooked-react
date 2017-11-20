@@ -9,7 +9,7 @@ class NavBar extends Component {
       <Link className="nav-link" to="/dinners">Your Dinners</Link>
       <Link className="nav-link" to="/dinners/invited">Invitations</Link>
       <Link className="nav-link" to="/dinners/new">New Dinner</Link>
-      <button className="nav-link" onClick={this.props.logout}>Logout</button>
+      <span className="nav-link" onClick={this.props.logout}>Logout</span>
     </div>);
   }
 }
