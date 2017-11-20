@@ -10,7 +10,7 @@ class DinnerTile extends Component {
     const threeRecipes = [];
     for (let i = 0; i < 3; i += 1) {
       if (this.props.dinner.recipes[i]) {
-      threeRecipes.push(<p className="recipe-on-tile">{this.props.dinner.recipes[i].name}</p>)
+      threeRecipes.push(<p key={i} className="recipe-on-tile">{this.props.dinner.recipes[i].name}</p>)
     }
     }
     return (

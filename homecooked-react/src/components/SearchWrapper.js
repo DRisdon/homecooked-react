@@ -4,6 +4,8 @@ import RecipeResults from "./RecipeResults";
 import SelectedRecipe from "./SelectedRecipe"
 import axios from "axios";
 import { Redirect } from "react-router-dom"
+import Loading from "../loading.gif"
+import NavBar from "./NavBar"
 
 class SearchWrapper extends Component {
 
@@ -12,7 +14,8 @@ class SearchWrapper extends Component {
     this.state = {
       recipeResults: [],
       currentRecipe: {},
-      submitted: false
+      submitted: false,
+      mode: 'search'
     };
 
     this.selectRecipe = this.selectRecipe.bind(this);
@@ -21,10 +24,15 @@ class SearchWrapper extends Component {
   }
 
   submitSearch(query) {
-    axios.get(`http://localhost:8080/recipes/search/${query}?auth_token=${this.props.user.id}`).then(res => {
+    this.setState({
+      recipeResults: [],
+      mode: 'loading'
+    })
+    axios.get(`${this.props.url}/recipes/search/${query}?auth_token=${this.props.user.id}`).then(res => {
       console.log(res.data);
       this.setState({
-        recipeResults: res.data
+        recipeResults: res.data,
+        mode: 'results'
       });
     });
     console.log('searched!');
@@ -46,7 +54,7 @@ class SearchWrapper extends Component {
       image_url: this.state.currentRecipe.image_url,
       ingredients: this.state.currentRecipe.ingredients.join("; ")
     }
-    axios.post(`http://localhost:8080/recipes?auth_token=${this.props.user.token}`, recipe).then(res => {
+    axios.post(`${this.props.url}/recipes?auth_token=${this.props.user.token}`, recipe).then(res => {
       this.setState({
         submitted: true
       })
@@ -55,16 +63,20 @@ class SearchWrapper extends Component {
 
   render() {
     return (
+      <div>
+        <NavBar {...this.props}/>
       <div className="search-wrapper">
         {this.state.submitted && <Redirect to={`/dinners/${this.props.match.params.id}`}/>}
         <div>
         <RecipeSearch submitSearch={this.submitSearch}/>
-        <RecipeResults results={this.state.recipeResults} selectRecipe={this.selectRecipe}/>
+        {this.state.mode === 'loading' && <img src={Loading} alt="loading" />}
+        <RecipeResults results={this.state.recipeResults} selectRecipe={this.selectRecipe} mode={this.state.mode}/>
       </div>
         <div>
           <SelectedRecipe recipe={this.state.currentRecipe} addRecipe={this.addRecipe}/>
         </div>
       </div>
+    </div>
     );
   }
 

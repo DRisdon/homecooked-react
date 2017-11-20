@@ -1,0 +1,76 @@
+import React, {Component} from 'react';
+import axios from "axios"
+import UserSearch from "./UserSearch"
+import { Redirect } from "react-router-dom"
+
+class InviteForm extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: [],
+      invited: false
+    };
+
+    this.getResults = this.getResults.bind(this);
+    this.checkIfInvited = this.checkIfInvited.bind(this);
+    this.invite = this.invite.bind(this);
+  }
+
+  getResults(query) {
+    if (query.length > 0) {
+      axios.get(`${this.props.url}/users/search/${query}?auth_token=${this.props.user.token}`).then(res => {
+        console.log(res.data);
+        this.setState({results: res.data});
+      });
+    }
+  }
+
+  checkIfInvited(user) {
+    for (let i = 0; i < this.props.dinner.invited.length; i++) {
+      if (this.props.dinner.invited[i].id === user.id) {
+        console.log('true');
+        return true;
+      }
+    }
+    for (let i = 0; i < this.props.dinner.attendees.length; i++) {
+      if (this.props.dinner.attendees[i].id === user.id) {
+        console.log('true');
+        return true;
+
+      }
+    }
+    console.log('false');
+    return false;
+  }
+
+  invite(e) {
+    e.preventDefault();
+    axios.post(`${this.props.url}/dinners/${this.props.dinner.info.id}/invite?auth_token=${this.props.user.token}`,
+      {invited_id: e.target.dataset.id}).then(res => {
+      this.setState({invited: true});
+    });
+  }
+
+  render() {
+    return (<div className="invite-form">
+      <button className='close-button' onClick={this.props.close}>X</button>
+      <UserSearch {...this.props} getResults={this.getResults}/>
+      <div>
+        {
+          this.state.results.map((user, i) => (<div className="user-result" key={i}>
+            <p>{user.name}</p>
+            {this.props.dinner.host.id !== user.id && !this.checkIfInvited(user) &&
+              <button data-id={user.id} className="button" onClick={this.invite}>Invite</button>}
+            {this.props.dinner.host.id === user.id && <p className="host-warning">(host)</p>}
+            {this.checkIfInvited(user) && <p className="host-warning">(already invited)</p>}
+          </div>))
+        }
+      </div>
+      {this.state.invited && <Redirect to={`/dinners/${this.props.dinner.info.id}`}/>}
+    </div>);
+  }
+
+}
+
+export default InviteForm;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import {Redirect, Link} from "react-router-dom"
+import NavBar from "./NavBar"
 
 class NewDinner extends Component {
 
@@ -39,7 +40,7 @@ class NewDinner extends Component {
     console.log('submit clicked');
     dinner.preventDefault();
     const { location, starts_at } = this.state;
-    axios.post(`http://localhost:8080/dinners?auth_token=${this.props.user.token}`, {location, starts_at}).then(response => {
+    axios.post(`${this.props.url}/dinners?auth_token=${this.props.user.token}`, {location, starts_at}).then(response => {
       console.log(response);
       const id = response.data.info.id;
       this.props.history.push(`/dinners/${id}`);
@@ -54,6 +55,7 @@ class NewDinner extends Component {
     }
     return (
       <div className="dinner-form">
+        <NavBar {...this.props}/>
         <h2>New Dinner</h2>
         <form onSubmit={this.onSubmit}>
           <label>

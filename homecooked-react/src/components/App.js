@@ -6,6 +6,7 @@ import UserAuth from './UserAuth';
 import Content from './Content';
 import NavBar from './NavBar'
 import { BrowserRouter} from "react-router-dom";
+import Loading from '../loading.gif'
 
 class App extends Component {
   constructor(){
@@ -24,12 +25,15 @@ class App extends Component {
       // Rails
       // url: 'http://localhost:3000',
     }
+
+
   }
 
   // once the component mounted, we want to initialize our user
   componentDidMount(){
     this.initUser();
   }
+
 
   // method to initialize our user
   initUser(){
@@ -78,7 +82,7 @@ class App extends Component {
     if(this.state.mode === 'loading'){
       return(
         <div className="loading">
-          <img src="https://s-media-cache-ak0.pinimg.com/originals/8b/a8/ce/8ba8ce24910d7b2f4c147359a82d50ef.gif"
+          <img src={Loading}
             alt="loading" />
         </div>
       )
@@ -94,8 +98,8 @@ class App extends Component {
         <div>
         <BrowserRouter>
           <div>
-          <NavBar logout={this.logout.bind(this)} user={this.state.user}/>
-          <Content logout={this.logout.bind(this)} user={this.state.user} />
+          {/* <NavBar logout={this.logout.bind(this)} user={this.state.user}/> */}
+          <Content url={this.state.url} logout={this.logout.bind(this)} user={this.state.user} toggleDimmed={this.toggleDimmed}/>
           </div>
         </BrowserRouter>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios"
 import { Redirect, Link } from "react-router-dom"
+import NavBar from "./NavBar"
 
 class SingleRecipe extends Component {
 
@@ -20,11 +21,11 @@ class SingleRecipe extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8080/recipes/${this.props.match.params.recipeid}?auth_token=${this.props.user.token}`).then(res => {
+    axios.get(`${this.props.url}/recipes/${this.props.match.params.recipeid}?auth_token=${this.props.user.token}`).then(res => {
       console.log(res.data);
       this.setState({ recipe: res.data })
     })
-    axios.get(`http://localhost:8080/dinners/${this.props.match.params.id}?auth_token=${this.props.user.token}`).then(res => {
+    axios.get(`${this.props.url}/dinners/${this.props.match.params.id}?auth_token=${this.props.user.token}`).then(res => {
       console.log(res.data);
       this.setState({ dinner: res.data })
     })
@@ -32,7 +33,7 @@ class SingleRecipe extends Component {
 
   delete(e) {
     e.preventDefault();
-    axios.delete(`http://localhost:8080/recipes/${this.props.match.params.recipeid}?auth_token=${this.props.user.token}`).then(res => {
+    axios.delete(`${this.props.url}/recipes/${this.props.match.params.recipeid}?auth_token=${this.props.user.token}`).then(res => {
       console.log('deleted!');
       this.setState({ deleted: true })
     })
@@ -40,6 +41,8 @@ class SingleRecipe extends Component {
 
   render() {
     return (
+      <div>
+        <NavBar {...this.props}/>
       <div className="single-recipe">
         {this.state.deleted && <Redirect to={`/dinners/${this.props.match.params.id}`}/>}
         <div className="single-recipe-left">
@@ -61,6 +64,7 @@ class SingleRecipe extends Component {
         <Link className="button" to={`/dinners/${this.props.match.params.id}`}>Back</Link>
         </div>
       </div>
+    </div>
     );
   }
 }

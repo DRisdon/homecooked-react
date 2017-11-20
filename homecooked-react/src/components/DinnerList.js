@@ -20,7 +20,7 @@ class DinnerList extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8080/dinners?auth_token=${this.props.user.token}`).then(res => {
+    axios.get(`${this.props.url}/dinners?auth_token=${this.props.user.token}`).then(res => {
       // console.log(res);
       this.setState({
         dinners: res.data
@@ -30,6 +30,7 @@ class DinnerList extends Component {
 
   render() {
     return (<div>
+      <NavBar {...this.props}/>
       <h2>Hosting</h2>
       <div className="dinner-list">
         {this.state.dinners.hosting.map((dinner) => <DinnerTile dinner={dinner} user={this.props.user} kind=""/>)}

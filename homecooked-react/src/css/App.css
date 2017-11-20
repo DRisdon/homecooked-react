@@ -261,6 +261,12 @@ a {
   margin-bottom: 100px;
 }
 
+.dinner-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 20%;
+}
+
 input {
   height: 25px;
 }
@@ -286,4 +292,86 @@ input[type="submit"]:hover, .button:hover, button[type="submit"]:hover, .form-bu
 
 input[type="submit"]:active, .button:active, button[type="submit"]:active, .form-button:active {
   background-color: rgb(106, 177, 236);
+}
+
+.close-button {
+  border: none;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  font-size: 12px;
+  background-color: rgb(236, 110, 106);
+  border-top: .5px solid rgb(185, 84, 81);
+  color: white;
+  outline: none;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.close-button:hover {
+  background-color: rgb(250, 157, 154);
+  cursor: pointer;
+}
+
+.close-button:active {
+  background-color: rgb(236, 110, 106);
+}
+
+.loading {
+  align-self: flex-end;
+}
+
+.invite-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 20%;
+}
+
+.invite {
+  background-color: rgb(236, 110, 106);
+  border: 1px solid rgb(185, 84, 81);
+  padding: 10px 0;
+  border-radius: 2px;
+  width: 400px;
+  margin: 1% 0;
+  color: white;
+}
+
+.dimmed {
+  opacity: 0.2;
+}
+
+.invite-form {
+  height: 50%;
+  opacity: 1;
+  background-color: rgb(251, 251, 251);
+  top: 25vh;
+  left: 36vw;
+  padding: 10px;
+  position: fixed;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.user-search {
+  margin-top: 30px;
+}
+
+.user-result {
+  background-color: white;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: left;
+  border-bottom: 1px solid rgb(233, 232, 232);
+}
+
+.host-warning {
+  color: rgb(136, 136, 136);
 }
