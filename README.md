@@ -1,7 +1,7 @@
 # Homecooked
-# a meal planning app
-
-## This app allows a user to plan out their meals by choosing recipes and inviting friends.
+# A meal planning app
+ This app allows a user to plan out their meals by choosing recipes and inviting friends.
+ Try it [here](homecooked.surge.sh)
 
 ## Tech
 - Ruby on Rails
@@ -11,6 +11,7 @@
 ## Structure
 - 5 tables - users, dinners, invites, attendees, recipes
 - A user can be invited by the owner of the event, and then the invited user can accept. When a user accepts an invitation, the database entry for that invitation is deleted, after being copied to the attendee table in the db.
+- A user can search for recipes using the edamam API, and save them to a specific event.
 
 ## Wireframes
 Your meals:
