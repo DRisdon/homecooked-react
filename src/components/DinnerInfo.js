@@ -14,6 +14,7 @@ class DinnerInfo extends Component {
       <div className={`single-dinner ${this.props.dimmed}`}>
         {this.props.deleted && <Redirect to="/dinners"/>}
         <h1>{moment(this.props.dinner.starts_at).format("ddd MM/DD")}</h1>
+        <h2>{moment(this.props.dinner.starts_at).format("hh:mm a")}</h2>
         {(this.props.dinner.host.id !== this.props.user.id) && <h2>Hosted by {this.props.dinner.host.name}</h2>}
         {<h3>at {this.props.dinner.info.location}</h3>}
         {(this.props.dinner.attendees.length <= 0)
