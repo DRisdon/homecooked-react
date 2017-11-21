@@ -21,10 +21,10 @@ class App extends Component {
       // url for the API we are using - uncomment the one you want to use
 
       // Express
-      url: 'http://homecooked-api.herokuapp.com',
+      // url: 'http://homecooked-api.herokuapp.com',
 
       // Rails
-      // url: 'http://localhost:3000',
+      url: 'http://localhost:8080',
     }
 
 
