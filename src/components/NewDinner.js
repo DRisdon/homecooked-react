@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from "axios";
 import {Redirect, Link} from "react-router-dom"
 import NavBar from "./NavBar"
+import moment from "moment"
+import DateTime from 'react-datetime'
 
 class NewDinner extends Component {
 
@@ -28,10 +30,9 @@ class NewDinner extends Component {
 
   // onChange function that updates the input value
   // of the time of the dinner
-  changeTime(e) {
-    e.preventDefault();
-    console.log('value', e.target.value)
-    this.setState({starts_at: e.target.value})
+  changeTime(date) {
+    // e.preventDefault();
+    this.setState({starts_at: date})
   };
 
   // onSubmit function that saves the input
@@ -50,19 +51,25 @@ class NewDinner extends Component {
   // function that renders a form to create a new dinner and
   // redirect to all dinners when the new dinner is submitted
   render() {
+    var yesterday = DateTime.moment().subtract( 1, 'day' );
+    var valid = current => {
+      return current.isAfter( yesterday );
+    }
+
     if (this.state.submitted) {
       return <Redirect to={`/dinners`}/>
     }
     return (
-      <div className="dinner-form">
+      <div>
         <NavBar {...this.props}/>
         <h2>New Dinner</h2>
-        <form onSubmit={this.onSubmit}>
+        <form  className="dinner-form" onSubmit={this.onSubmit}>
           <label>
-            Time:
+            Date/Time:
           </label>
           <br/>
-          <input type='datetime-local' value={this.state.starts_at} onChange={this.changeTime}/>
+          <DateTime value={this.state.starts_at} onChange={this.changeTime} isValidDate={ valid }/>
+          {/* <input type='datetime-local' value={this.state.starts_at} onChange={this.changeTime}/> */}
           <br/>
           <br/>
           <label>
