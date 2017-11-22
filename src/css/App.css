@@ -194,10 +194,10 @@ a {
 }
 
 .recipe-results {
- display: flex;
- flex-direction: row;
- flex-wrap: wrap;
- width: 50vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50vw;
 }
 
 .recipe-result {
@@ -305,7 +305,7 @@ input {
   height: 25px;
 }
 
-input[type="submit"], .button, button[type="submit"], .form-button{
+input[type="submit"], .button, button[type="submit"], .form-button {
   border: none;
   border-radius: 5px;
   padding: 6px 20px;
@@ -417,18 +417,19 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
   left: 10px;
 }
 
-@media (max-width: 800px) {
+.invite-message {
+  color: rgb(136, 136, 136);
+}
 
+@media (max-width: 800px) {
   body {
     margin-top: 0;
     margin-bottom: 30px;
   }
-
   .logo {
     position: relative;
     top: 0;
   }
-
   .nav-bar {
     height: 30vh;
     margin: 0;
@@ -437,7 +438,6 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
     justify-content: flex-start;
     position: relative;
   }
-
   .nav-links {
     margin-top: 5px;
     display: flex;
@@ -445,47 +445,38 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
     text-align: center;
     border: none;
   }
-
   .user-name {
     display: none;
   }
-
   .nav-link {
     margin: 5px;
   }
-
   .dinner-list {
     flex-direction: column;
     align-items: center;
   }
-
   .dinner-wrapper {
     flex-direction: column;
     align-items: center;
   }
-
   .single-dinner {
     margin-bottom: 0;
   }
-
   .user-list {
     display: block;
     text-align: center;
     width: 100%;
     margin-bottom: 100px;
   }
-
   .recipe-result-saved {
     width: 80%;
     flex-direction: column;
     font-size: 10px;
   }
-
   .recipe-result-info {
     font-size: 12px;
     text-align: center;
   }
-
   .invite-form {
     height: 50%;
     width: 70%;
@@ -498,7 +489,6 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
     font-family: 'Roboto', sans-serif;
     box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, 0.5);
   }
-
   .search-bar {
     width: 70%;
     margin: 1px;
@@ -512,34 +502,28 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
     padding: 2px;
     margin: 1px;
   }
-
   .single-recipe {
     flex-direction: column;
     margin: 10px 20px 100px 20px;
   }
-
   .invite-list {
     flex-direction: column;
     align-items: center;
     margin: 0 10px 100px 10px;
   }
-
   .invite {
     margin: 10px;
   }
-
   .search-wrapper {
     flex-direction: column-reverse;
     align-items: center;
   }
-
   .recipe-results {
     align-items: center;
     flex-direction: column;
     margin: 0;
     width: 100%;
   }
-
   .selected-recipe {
     margin: 10px;
     flex-direction: column;
@@ -549,9 +533,4 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
     min-height: 0;
     transition: 1s all;
   }
-
-  .invite-message {
-    color: rgb(136, 136, 136);
-  }
-
 }

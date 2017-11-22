@@ -60,15 +60,16 @@ class InviteForm extends Component {
     e.preventDefault();
     axios.post(`${this.props.url}/dinners/${this.state.dinner.info.id}/invite?auth_token=${this.props.user.token}`,
       {invited_id: e.target.dataset.id}).then(res => {
-      this.setState({invited: true, results: [], message: `${e.target.dataset.name} was invited!`});
+      this.setState({invited: true, results: []});
     });
     this.state.dinner.invited.push({id: Number(e.target.dataset.id)})
+    this.setState({message: `${e.target.dataset.name} was invited!`})
   }
 
   render() {
     return (<div className="invite-form">
       <button className='close-button' onClick={this.props.close}>X</button>
-      <UserSearch {...this.props} message={this.message} getResults={this.getResults}/>
+      <UserSearch {...this.props} message={this.state.message} getResults={this.getResults}/>
       <div>
         {
           this.state.results.map((user, i) => (<div className="user-result" key={i}>
