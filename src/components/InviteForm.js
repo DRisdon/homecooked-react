@@ -16,7 +16,8 @@ class InviteForm extends Component {
         attendees: [],
         invited: [],
         recipes: []
-      }
+      },
+      message: ''
     };
 
     this.getResults = this.getResults.bind(this);
@@ -32,7 +33,7 @@ class InviteForm extends Component {
     if (query.length > 0) {
       axios.get(`${this.props.url}/users/search/${query}?auth_token=${this.props.user.token}`).then(res => {
         console.log(res.data);
-        this.setState({results: res.data});
+        this.setState({results: res.data, message: ''});
       });
     }
   }
@@ -59,7 +60,7 @@ class InviteForm extends Component {
     e.preventDefault();
     axios.post(`${this.props.url}/dinners/${this.state.dinner.info.id}/invite?auth_token=${this.props.user.token}`,
       {invited_id: e.target.dataset.id}).then(res => {
-      this.setState({invited: true, results: []});
+      this.setState({invited: true, results: [], message: `${e.target.dataset.name} was invited!`});
     });
     this.state.dinner.invited.push({id: Number(e.target.dataset.id)})
   }
@@ -67,13 +68,13 @@ class InviteForm extends Component {
   render() {
     return (<div className="invite-form">
       <button className='close-button' onClick={this.props.close}>X</button>
-      <UserSearch {...this.props} getResults={this.getResults}/>
+      <UserSearch {...this.props} message={this.message} getResults={this.getResults}/>
       <div>
         {
           this.state.results.map((user, i) => (<div className="user-result" key={i}>
             <p>{user.name}</p>
             {this.state.dinner.host.id !== user.id && !this.checkIfInvited(user) &&
-              <button data-id={user.id} className="button" onClick={this.invite}>Invite</button>}
+              <button data-name={user.name} data-id={user.id} className="button" onClick={this.invite}>Invite</button>}
             {this.state.dinner.host.id === user.id && <p className="host-warning">(host)</p>}
             {this.checkIfInvited(user) && <p className="host-warning">(already invited)</p>}
           </div>))

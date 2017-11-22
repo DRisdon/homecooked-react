@@ -30,6 +30,7 @@ class UserSearch extends Component {
       <div>
         <form className="user-search" onSubmit={this.onSubmit}>
           <p>Invite Friends</p>
+          <p className="invite-message">{this.props.message}</p>
           <input className="search-bar" value={this.state.query} onChange={this.changeQuery}/>
           <input type='submit'/>
 

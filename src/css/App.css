@@ -550,4 +550,8 @@ input[type="submit"]:active, .button:active, button[type="submit"]:active, .form
     transition: 1s all;
   }
 
+  .invite-message {
+    color: rgb(136, 136, 136);
+  }
+
 }
