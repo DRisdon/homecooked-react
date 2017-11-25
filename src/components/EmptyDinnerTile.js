@@ -6,6 +6,8 @@ import {Link} from "react-router-dom"
 
 class EmptyDinnerTile extends Component {
 
+  // empty tile, acting as a button to create a new event
+
   render() {
     return (
       <span>

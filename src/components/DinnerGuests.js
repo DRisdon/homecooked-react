@@ -7,9 +7,12 @@ class DinnerGuests extends Component {
     this.state = {};
   }
 
+  // component for rendering the list of attendees and invites for an event
+
   render() {
     return (
       <div>
+        {/* render attendees and invites if there are any  */}
         {((this.props.dinner.attendees.length > 0) || (this.props.dinner.invited.length > 0)) && <div className="user-list">
               <h1>Guests</h1>
               {

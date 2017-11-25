@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 
 class RecipeResults extends Component {
 
+  // search results for recipe search
+
   constructor(props) {
     super(props);
 
     this.selectRecipe = this.selectRecipe.bind(this)
   }
 
+  // select recipe to display in SelectedRecipe component
   selectRecipe(e) {
     e.preventDefault();
     console.log('recipe ' + e.target.dataset.index + ' selected!');

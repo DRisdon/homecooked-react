@@ -9,6 +9,8 @@ import NavBar from "./NavBar"
 
 class SearchWrapper extends Component {
 
+  // wrapper component for recipe search components (search form, results, selected view)
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +25,7 @@ class SearchWrapper extends Component {
     this.addRecipe = this.addRecipe.bind(this)
   }
 
+  // submit search, set state, make api call
   submitSearch(query) {
     this.setState({
       recipeResults: [],
@@ -38,12 +41,14 @@ class SearchWrapper extends Component {
     console.log('searched!');
   }
 
+  // select a recipe to display, passed as props to recipe results component
   selectRecipe(index) {
     this.setState({
       currentRecipe: this.state.recipeResults[index]
     });
   }
 
+  // add a recipe to an event - makes post call, and redirects
   addRecipe(e) {
     e.preventDefault();
     const recipe = {

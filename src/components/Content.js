@@ -16,6 +16,7 @@ class Content extends Component {
   }
 // component that renders content
 // this will render when there is a valid user
+// this component serves as the router for the app
 
 
 render() {

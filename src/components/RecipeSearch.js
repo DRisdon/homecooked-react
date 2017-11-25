@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class RecipeSearch extends Component {
 
+  // search form for recipes - controlled input, no autocomplete
+
   constructor(props) {
     super(props);
     this.state = {

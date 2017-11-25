@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class UserSearch extends Component {
 
+  // search form for users to invite - results render to InviteForm
+
   constructor(props) {
     super(props);
     this.state = {

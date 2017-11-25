@@ -9,6 +9,8 @@ import DinnerGuests from "./DinnerGuests"
 
 class SingleDinner extends Component {
 
+  // single dinner view - contains dinner info, recipes, and invites
+
   constructor(props) {
     super(props);
     this.state = {
@@ -55,6 +57,7 @@ class SingleDinner extends Component {
     })
   }
 
+  // opens invite window
   newInvite(e) {
     this.setState({
       mode: 'invite',
@@ -62,11 +65,13 @@ class SingleDinner extends Component {
     },);
   }
 
+  // closes invite window
   closeInviteWindow(e) {
     e.preventDefault();
     this.setState({mode: 'view', dimmed: ''});
   }
 
+  // check if a user is invited or attending, or nothing at all - used for uninviteUser and removeSelf
   checkIfInvited(userId) {
     for (let i = 0; i < this.state.dinner.invited.length; i++) {
       if (this.state.dinner.invited[i].id === userId) {
@@ -84,6 +89,7 @@ class SingleDinner extends Component {
     return false;
   }
 
+  // remove a user from the event
   uninviteUser(e) {
     e.preventDefault();
     const userId = Number(e.target.dataset.id);
@@ -100,6 +106,7 @@ class SingleDinner extends Component {
     }
   }
 
+  // remove yourself from an event
   removeSelf(e) {
     e.preventDefault();
     const userId = this.props.user.id;

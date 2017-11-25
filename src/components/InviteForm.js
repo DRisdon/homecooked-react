@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom"
 
 class InviteForm extends Component {
 
+  // form for inviting new users to an event
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,10 +27,12 @@ class InviteForm extends Component {
     this.invite = this.invite.bind(this);
   }
 
+  // set dinner state
   componentDidMount() {
     this.setState({dinner: this.props.dinner})
   }
 
+  // submit search (autocomplete)
   getResults(query) {
     if (query.length > 0) {
       axios.get(`${this.props.url}/users/search/${query}?auth_token=${this.props.user.token}`).then(res => {
@@ -38,6 +42,7 @@ class InviteForm extends Component {
     }
   }
 
+  // check if a user has been invited
   checkIfInvited(user) {
     for (let i = 0; i < this.state.dinner.invited.length; i++) {
       if (this.state.dinner.invited[i].id === user.id) {
@@ -56,6 +61,7 @@ class InviteForm extends Component {
     return false;
   }
 
+  // invite a user
   invite(e) {
     e.preventDefault();
     axios.post(`${this.props.url}/dinners/${this.state.dinner.info.id}/invite?auth_token=${this.props.user.token}`,

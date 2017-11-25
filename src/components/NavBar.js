@@ -4,6 +4,8 @@ import axios from 'axios'
 
 class NavBar extends Component {
 
+  // navigation, loads with each fullscreen component
+
   constructor(props) {
     super(props);
     this.state = {

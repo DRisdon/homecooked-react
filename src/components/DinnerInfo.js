@@ -9,6 +9,8 @@ class DinnerInfo extends Component {
     super(props);
   }
 
+
+  // component for rendering general info about a dinner event
   render() {
     return (
       <div className={`single-dinner ${this.props.dimmed}`}>
@@ -26,6 +28,7 @@ class DinnerInfo extends Component {
           {this.props.dinner.recipes.length <= 0 && <p>Nothing here yet!</p>}
           <div className="recipes-saved">
             {
+              // map through the recipes and display them
               this.props.dinner.recipes.map(recipe => {
                 return <Link to={`/dinners/${this.props.match.params.id}/recipes/${recipe.id}`} className="recipe-result-saved">
                   <img className="recipe-image-small" src={recipe.image_url}/>

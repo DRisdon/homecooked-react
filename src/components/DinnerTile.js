@@ -6,6 +6,8 @@ import {Link} from "react-router-dom"
 
 class DinnerTile extends Component {
 
+  // a single dinner event component in the dinner list
+
   render() {
     const threeRecipes = [];
     for (let i = 0; i < 3; i += 1) {

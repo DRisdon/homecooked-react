@@ -6,6 +6,8 @@ import NavBar from './NavBar'
 
 class InviteList extends Component {
 
+  // a user's list of invites
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +19,7 @@ class InviteList extends Component {
     this.accept = this.accept.bind(this)
   }
 
+  // accept an invite
   accept(e) {
     e.preventDefault();
     const id = e.target.dataset.id
@@ -25,6 +28,7 @@ class InviteList extends Component {
   }
 )}
 
+  // api call for invites
   componentDidMount() {
       axios.get(`${this.props.url}/dinners/invited?auth_token=${this.props.user.token}`).then(res => {
         this.setState({ invites: res.data })

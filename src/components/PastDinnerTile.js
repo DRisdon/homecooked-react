@@ -6,6 +6,8 @@ import {Link} from "react-router-dom"
 
 class PastDinnerTile extends Component {
 
+  // dinner tile for past dinners, somewhat redundant
+
   render() {
     const threeRecipes = [];
     for (let i = 0; i < 3; i += 1) {

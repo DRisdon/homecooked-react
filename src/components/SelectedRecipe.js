@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class SelectedRecipe extends Component {
 
+  // selected recipe view component
+
   render() {
     return (
       <div className="selected-recipe">

@@ -5,6 +5,8 @@ import NavBar from "./NavBar"
 
 class SingleRecipe extends Component {
 
+  // single recipe view - allows deleting
+
   constructor(props) {
     super(props);
     this.state = {
