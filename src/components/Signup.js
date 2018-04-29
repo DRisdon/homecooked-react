@@ -12,8 +12,7 @@ class SignUp extends Component {
         name: '',
         email: '',
         password: '',
-        password_confirmation: '',
-        avatar: ''
+        password_confirmation: ''
       }
     }
   }
@@ -58,11 +57,11 @@ class SignUp extends Component {
             onChange={e => this.changeInput(e, 'email')}
           /><br/>
 
-          <label htmlFor='email'>Link to Avatar</label><br/>
+          {/* <label htmlFor='email'>Link to Avatar</label><br/>
           <input value={this.state.inputs.avatar}
             id='avatar' name='avatar' type='text'
             onChange={e => this.changeInput(e, 'avatar')}
-          /><br/>
+          /><br/> */}
 
           <label htmlFor='password'>Password</label><br/>
           <input value={this.state.inputs.password}
